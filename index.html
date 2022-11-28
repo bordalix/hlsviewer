@@ -1,0 +1,40 @@
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<div class="container">
+  <video id="video" width="640" height="360" autoplay controls></video>
+  <p id="error"></p>
+</div>
+
+<script>
+  if (Hls.isSupported()) {
+    const error = (txt = 'Error loading URL') =>
+      (document.getElementById('error').textContent = txt);
+    const url = new URL(location.href).searchParams.get('url');
+    if (url) {
+      fetch(url)
+        .then((res) => {
+          if (res.ok) {
+            const hls = new Hls();
+            const video = document.getElementById('video');
+            video.style.display = 'block';
+            hls.loadSource(url);
+            hls.attachMedia(video);
+          } else {
+            error();
+          }
+        })
+        .catch((e) => error(e));
+    }
+  }
+</script>
+
+<style>
+  video {
+    display: none;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+  }
+</style>
