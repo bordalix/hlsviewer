@@ -2,13 +2,15 @@
 
 <div class="container">
   <video id="video" autoplay controls></video>
-  <p id="error"></p>
 </div>
 
 <script>
   if (Hls.isSupported()) {
-    const error = (txt = 'Error loading URL') =>
-      (document.getElementById('error').textContent = txt);
+    const error = (txt = 'Error loading URL') => {
+      const p = document.createElement('p');
+      p.textContent = txt;
+      document.body.appendChild(p);
+    };
     const url = new URL(location.href).searchParams.get('url');
     if (url) {
       fetch(url)
@@ -31,12 +33,12 @@
 <style>
   video {
     display: none;
-    max-height: 90%;
-    max-width: 90%;
+    max-height: 80%;
+    max-width: 80%;
   }
   .container {
     display: flex;
+    align-items: center;
     justify-content: center;
-    padding-top: 2rem;
   }
 </style>
