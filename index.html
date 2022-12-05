@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <div class="container">
-  <video id="video" width="640" height="360" autoplay controls></video>
+  <video id="video" autoplay controls></video>
   <p id="error"></p>
 </div>
 
@@ -31,6 +31,8 @@
 <style>
   video {
     display: none;
+    max-height: 90%;
+    max-width: 90%;
   }
   .container {
     display: flex;
